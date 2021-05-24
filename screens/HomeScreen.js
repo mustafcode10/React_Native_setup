@@ -1,31 +1,31 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet, StatusBar } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import React, { useContext } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import FormButton from '../components/FormButton';
+import { AuthContext } from '../navigation/AuthProvider';
 
-const HomeScreen = ({navigation}) => {
-
-  const { colors } = useTheme();
-
-  const theme = useTheme();
+const HomeScreen = () => {
+   const {user, logout} = useContext(AuthContext);
   
-    return (
-      <View style={styles.container}>
-        <StatusBar barStyle= { theme.dark ? "light-content" : "dark-content" }/>
-        <Text style={{color: colors.text}}>Home Screen</Text>
-      <Button
-        title="Go to details screen"
-        onPress={() => navigation.navigate("Details")}
-      />
-      </View>
-    );
-};
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Welcome</Text>
+      <FormButton buttonTitle='Logout' onPress={() => logout()} />
+    </View>
+  );
+}
 
 export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
-    alignItems: 'center', 
-    justifyContent: 'center'
+    backgroundColor: '#f9fafd',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
   },
+  text: {
+    fontSize: 20,
+    color: '#333333'
+  }
 });
